@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import defaultTheme from 'tailwindcss/defaultTheme';
 
 export default {
 	darkMode: ["class"],
@@ -18,6 +19,9 @@ export default {
 			}
 		},
 		extend: {
+      fontFamily: {
+        sans: ["Nunito", ...defaultTheme.fontFamily.sans],
+      },
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -55,18 +59,25 @@ export default {
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
-					primary: 'hsl(var(--sidebar-primary))',
-					'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-					accent: 'hsl(var(--sidebar-accent))',
-					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-					border: 'hsl(var(--sidebar-border))',
-					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+        // Direct PRD color mapping for utility classes
+        // These allow using classes like text-primaryText, bg-accent-blue etc.
+        'primaryText': 'hsl(var(--foreground))', // Mapped to PRD primaryText via --foreground CSS var
+        'secondaryText': 'hsl(var(--muted-foreground))', // Mapped to PRD secondaryText via --muted-foreground CSS var
+        'accentBlue': '#007BFF', // PRD accentBlue
+        'accentRed': '#F06548',   // PRD accentRed
+        'accentGreen': '#0AB39C', // PRD accentGreen
+        'accentYellow': '#F0AD4E',// PRD accentYellow
+        // Raw PRD colors, if needed directly and not through semantic theme mapping
+        'prd-background': '#F3F3F9',
+        'prd-surface': '#FFFFFF',
+        'prd-sidebar': '#405189',
+        'prd-border': '#E9EBEC',
 			},
 			borderRadius: {
-				lg: 'var(--radius)',
-				md: 'calc(var(--radius) - 2px)',
-				sm: 'calc(var(--radius) - 4px)'
+				lg: 'var(--radius)', // 0.5rem
+				md: 'calc(var(--radius) - 2px)', // 0.375rem (Tailwind's default 'md', PRD 'default')
+				sm: 'calc(var(--radius) - 4px)' // 0.25rem
 			},
 			keyframes: {
 				'accordion-down': {
